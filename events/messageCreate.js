@@ -1,11 +1,14 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Events } = require("discord.js");
+const autoResponses = require('../autoResponses.json');
 const Config = require("../config.json");
+
+const AUTO_RESPONSE_CHANCE = 30; // 30% chance of triggering an auto response
 
 module.exports = {
     execute(message) {
-        if (message.author.bot) return;    
+        if (message.author.bot) return;
         
         // Command handling
         if (message.content.startsWith(Config.prefix)) {
@@ -18,13 +21,19 @@ module.exports = {
                 // Check if message matches the command.name
                 if (command.name === message.content.split('.')[1]) {
                     command.execute(message);
+                    return;
                 };
             };
+
+            message.reply("No such command 😢");
         };
 
-        // 67 BS
-        if (message.content === '67') {
-            message.reply('https://c.tenor.com/rCYUbYiuSqYAAAAC/tenor.gif');
+        // Auto responses handling
+        for (const word in autoResponses) {
+            if (message.content.toLowerCase().startsWith(word) &&
+                Math.random() < (AUTO_RESPONSE_CHANCE / 100)) {
+                message.reply(autoResponses[word][Math.floor(Math.random() * autoResponses[word].length)]);
+            }
         }
     },
 
