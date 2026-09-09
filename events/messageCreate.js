@@ -22,7 +22,6 @@ module.exports = {
             };
         };
 
-
         // 67 BS
         if (message.content === '67') {
             message.reply('https://c.tenor.com/rCYUbYiuSqYAAAAC/tenor.gif');
