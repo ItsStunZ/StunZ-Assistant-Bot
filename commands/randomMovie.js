@@ -1,6 +1,6 @@
-const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ButtonInteraction, Events, ModalBuilder, LabelBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
-const Config = require('../config.json');
+const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events, ModalBuilder, LabelBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
 const { client } = require('../index.js');
+const Config = require('../config.json');
 
 const commandName = "random_movie"
 
@@ -23,7 +23,8 @@ module.exports = {
     },
 
     name: commandName,
-    description: "Choose a category and language to receive a random movie"
+    description: "Choose a category and language to receive a random movie",
+    // disabled: true
 }
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -37,14 +38,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
     // Show movie modal submit
     if (interaction.customId === 'moviemodal') {
         // Retrieve data from modal
-        const category = interaction.fields.getStringSelectValues('categorySelect');
-        const language = interaction.fields.getStringSelectValues('languageSelect');
+        try {
+            const category = interaction.fields.getStringSelectValues('categorySelect');
+            const language = interaction.fields.getStringSelectValues('languageSelect');
 
-        if (category && language) {
-            const randomMovie = await getRandomMovie(category, language);
-            console.log(randomMovie);
-            const movieEmbed = createEmbed(randomMovie);
-            interaction.reply({ embeds: [movieEmbed] });
+            if (category && language) {
+                const randomMovie = await getRandomMovie(category, language);
+                console.log(randomMovie);
+                const movieEmbed = createEmbed(randomMovie);
+                interaction.reply({ embeds: [movieEmbed] });
+            }
+        } catch(error) {
+            console.error(error);
         }
     }
 
@@ -96,16 +101,19 @@ async function getRandomMovie(category, language) {
             `https://api.themoviedb.org/3/discover/movie?with_genres=${category}&with_original_language=${language}`,
             {
                 headers: {
-                    Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+                    Authorization: `Bearer ${Config.tmdb_api_key}`,
                     accept: "application/json"
                 }
             }
         );
 
-    const data = await response.json();
-    const movie = data.results[Math.floor(Math.random() * data.results.length)];
-
-    return movie;
+    if (response) {
+        const data = await response.json();
+        const movie = data.results[Math.floor(Math.random() * data.results.length)];
+        return movie;
+    } else {
+        console.log('Could not get a response for command randomMovie');
+    }
 }
 
 function createEmbed(data) {

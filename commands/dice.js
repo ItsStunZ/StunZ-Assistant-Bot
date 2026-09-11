@@ -8,5 +8,6 @@ module.exports = {
     },
 
     name: "roll",
-    description: "Roll a dice to get a number from 1 - 6"
+    description: ".roll [predicted number] use: .roll or .roll 2 (2 being the number you think the dice will land on)",
+    // disabled: true
 }

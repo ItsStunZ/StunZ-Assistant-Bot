@@ -1,12 +1,14 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
+const { token } = require('./config.json');
+const logs  = require('./modules/logs.js');
 
 // Client
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
+    GatewayIntentBits.MessageContent,
 ]});
 
 // Events
@@ -23,6 +25,7 @@ for (const file of eventFiles) {
     }
 }
 
-client.login(process.env.TOKEN);
-
+client.login(token);
 module.exports = { client };
+
+logs.send(client, 'Test', 'description', 'test@stunz');

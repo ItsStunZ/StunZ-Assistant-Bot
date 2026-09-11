@@ -19,7 +19,13 @@ module.exports = {
                 const filePath = path.join(__dirname, '..', 'commands', file);
                 const command = require(filePath);
                 // Check if message matches the command.name
-                if (command.name === message.content.split('.')[1]) {
+                if (command.name === message.content.split(Config.prefix)[1].split(' ')[0]) {
+                    // Check if command is disabled
+                    if (command.disabled) {
+                        message.reply("That command is currently disabled");
+                        return;
+                    }
+                    
                     command.execute(message);
                     return;
                 };

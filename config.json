@@ -1,3 +1,7 @@
 {
-    "prefix": "."
+    "token": "MTU0Njg5MDk3NzQ1NTc3MTY3OQ.GBPmig._32mM57ccp4cBBl1KhCRPuQYM3wOJmfK5DNYTg",
+    "tmdb_api_key": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjk2OWJmOTAzN2I4ZDUwNDgzNWM2MzM2OTYxMTk2MCIsIm5iZiI6MTc4ODkwMjE5MC45OTMsInN1YiI6IjZhYTA3YjJlNjA4YTYyNTBjOTMxOTBhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q4GwQYkChfRnqJjMHAKpIMFLEwypjTnihlO_aY4k100",
+    "prefix": ".",
+
+    "logs_channel_id": "1548072006170181834"
 }
