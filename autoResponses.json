@@ -1,30 +1,45 @@
 {
-    "hello": [
-        "hi",
-        "hello",
-        "hola",
-        "yo"
-    ],
-    "goodbye": [
-        "bye",
-        "goodbye",
-        "ciao",
-        "cya"
-    ],
-    "goodnight": [
-        "goodnight",
-        "night 🛌",
-        "gn"
-    ],
-    "gn": [
-        "goodnight",
-        "night 🛌",
-        "gn"
-    ],
-    "67": [
-        "https://c.tenor.com/rCYUbYiuSqYAAAAC/tenor.gif",
-        "Shut the fuck up.",
-        "🤦‍♂️",
-        "Grow up."
-    ]
+    "hello": {
+        "alwaysRespond": false,
+        "responses": [
+            "hi",
+            "hello",
+            "hola",
+            "yo"
+        ]
+    },
+    "goodbye": {
+        "alwaysRespond": false,
+        "responses": [
+            "bye",
+            "goodbye",
+            "ciao",
+            "cya"
+        ]
+    },
+    "goodnight": {
+        "alwaysRespond": true,
+        "responses": [
+            "goodnight",
+            "night 🛌",
+            "gn"
+        ]
+    },
+    "gn": {
+        "alwaysRespond": true,
+        "responses": [
+            "goodnight",
+            "night 🛌",
+            "gn"
+        ]
+    },
+    "67": {
+        "alwaysRespond": true,
+        "responses": [
+            "https://c.tenor.com/rCYUbYiuSqYAAAAC/tenor.gif",
+            "Shut the fuck up.",
+            "🤦‍♂️",
+            "Grow up."
+        ]
+    }
 }

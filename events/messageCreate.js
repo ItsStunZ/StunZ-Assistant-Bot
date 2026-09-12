@@ -9,6 +9,8 @@ const AUTO_RESPONSE_CHANCE = 30; // 30% chance of triggering an auto response
 module.exports = {
     execute(message) {
         if (message.author.bot) return;
+
+        console.log(`${message.author.displayName} sent a message in ${message.channel.name} saying "${message.content}"`);
         
         // Command handling
         if (message.content.startsWith(Config.prefix)) {
@@ -35,13 +37,23 @@ module.exports = {
         };
 
         // Auto responses handling
+        // <word> being the word to listen for
         for (const word in autoResponses) {
-            if (message.content.toLowerCase().startsWith(word) &&
-                Math.random() < (AUTO_RESPONSE_CHANCE / 100)) {
-                message.reply(autoResponses[word][Math.floor(Math.random() * autoResponses[word].length)]);
+            // check if message contains a the word
+            if (message.content.toLowerCase() === word) {
+                // get random response
+                const response = autoResponses[word].responses[Math.floor(Math.random() * autoResponses[word].responses.length)];
+
+                // check if bot should respond without a chance
+                if (autoResponses[word].alwaysRespond) {
+                    message.reply(response);
+                    break;
+                } else if (Math.random() < (AUTO_RESPONSE_CHANCE / 100)) {
+                    message.reply(response);
+                    break;
+                }
             }
         }
     },
-
     name: Events.MessageCreate
 }
