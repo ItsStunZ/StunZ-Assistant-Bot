@@ -9,8 +9,6 @@ const AUTO_RESPONSE_CHANCE = 30; // 30% chance of triggering an auto response
 module.exports = {
     execute(message) {
         if (message.author.bot) return;
-
-        console.log(`${message.author.displayName} sent a message in ${message.channel.name} saying "${message.content}"`);
         
         // Command handling
         if (message.content.startsWith(Config.prefix)) {
