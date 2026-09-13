@@ -67,7 +67,7 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
     }
 
     // User leaves a channel
-    if (oldState.channel) {
+    if (!newState.channelId) {
         // Get channel id
         const oldVoiceChannel = await client.channels.fetch(oldState.channelId)
         const user = newState.member;
