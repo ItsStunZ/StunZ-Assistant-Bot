@@ -6,17 +6,31 @@
 const { EmbedBuilder } = require('discord.js')
 const Config = require('../config.json');
 
+const colors = {
+    "primary": "#3498DB",
+    "success": "#57F287",
+    "error": "#ED4245"
+}
+
 module.exports = {
     async send(client, args) {
         const logEmbed = new EmbedBuilder()
-            .setColor(0x0099ff)
             .setTitle(args.title || '?')
             .setDescription(args.description || '?')
-            .setFooter({ text: `ID: ${args.userId || '?'}` });
 
-        // Add any extras (e.g image)
+
+        // add options (args)
+        // color
+        if (args.color && colors[args.color]) {
+            logEmbed.setColor(colors[args.color]);
+        }
+        // image
         if (args.image) {
-            logEmbed.setImage(args.image);
+            logEmbed.setThumbnail(args.image);
+        }
+        // user id
+        if (args.userId) {
+            logEmbed.setFooter({ text: `ID: ${args.userId}` });
         }
 
         try {
